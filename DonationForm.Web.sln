@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EFFE501-52FC-448F-B8C1-7443742E4D20}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Donations.Web", "Donations.Web\Donations.Web.csproj", "{FBB25162-79C6-4AED-8193-B615C930D0FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBB25162-79C6-4AED-8193-B615C930D0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB25162-79C6-4AED-8193-B615C930D0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB25162-79C6-4AED-8193-B615C930D0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB25162-79C6-4AED-8193-B615C930D0FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD3B5264-FC78-4DD0-9768-6A2B169C188F}
+	EndGlobalSection
+EndGlobal
