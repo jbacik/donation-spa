@@ -1,4 +1,6 @@
 using Donations.Web.Data;
+using Donations.Web.Pages;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +29,9 @@ namespace Donations.Web
             services.AddMediatR(typeof(Startup));
 
             services.AddRazorPages();
+
+            services.AddMvc()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

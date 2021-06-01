@@ -1,5 +1,6 @@
 ﻿using Donations.Web.Data;
 using Donations.Web.Models;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -52,8 +53,8 @@ namespace Donations.Web.Pages
 
             public string CardName { get; set; }
             public string CardNumber { get; set; }
-            public string ExpiryDate { get; set; }
-            public string CVC { get; set; }
+            public string CardExpiryDate { get; set; }
+            public string CardCVC { get; set; }
 
             public string Address1 { get; set; }
             public string Address2 { get; set; }
@@ -135,5 +136,31 @@ namespace Donations.Web.Pages
             public string ConfirmedFirstName { get; set; }
             public string ConfirmationNumber { get; set; }
         }
+
+        public class Validator : AbstractValidator<Command>
+        {
+            public Validator()
+            {
+                RuleFor(m => m.FirstName).NotEmpty().Length(1, 50);
+                RuleFor(m => m.LastName).NotEmpty().Length(1, 50);
+                RuleFor(m => m.Email).NotEmpty().EmailAddress().Length(1, 254);
+
+
+                RuleFor(m => m.Country).NotEmpty().Length(1, 100);
+                RuleFor(m => m.Address1).NotEmpty().Length(1, 100);
+                RuleFor(m => m.Address2).Length(0, 100);
+                RuleFor(m => m.City).NotEmpty().Length(1, 50);
+                RuleFor(m => m.StateProvince).NotEmpty().Length(1, 50);
+                RuleFor(m => m.PostalCode).NotEmpty().Length(1, 10);
+
+                RuleFor(m => m.CardName).NotEmpty().Length(1, 150);
+                RuleFor(m => m.CardNumber).NotEmpty().Length(1, 25);
+                RuleFor(m => m.CardExpiryDate).NotEmpty().Length(1, 10);
+                RuleFor(m => m.CardCVC).NotEmpty().Length(1, 10);
+                RuleFor(m => m.DonationAmount).NotEmpty().WithMessage("Please enter a donation amount in USD")
+                                            .GreaterThan(0.0).WithMessage("Please enter a donation amount in USD");
+            }
+        }
     }
 }
+

@@ -94,15 +94,15 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <label asp-for="Data.ExpiryDate" class="form-label">Expiry</label>
-                    <input type="text" asp-for="Data.ExpiryDate" placeholder="MM/YY" class="form-control" required="required" />
-                    <span asp-validation-for="Data.ExpiryDate" class="text-danger"></span>
+                    <label asp-for="Data.CardExpiryDate" class="form-label">Expiry</label>
+                    <input type="text" asp-for="Data.CardExpiryDate" placeholder="MM/YY" class="form-control" required="required" />
+                    <span asp-validation-for="Data.CardExpiryDate" class="text-danger"></span>
                 </div>
                 <div class="col">
-                    <label asp-for="Data.CVC" class="form-label">CVC/CCV</label>
-                    <input type="text" asp-for="Data.CVC" class="form-control" required="required" aria-describedby="cvcHelp" />
+                    <label asp-for="Data.CardCVC" class="form-label">CVC/CCV</label>
+                    <input type="text" asp-for="Data.CardCVC" class="form-control" required="required" aria-describedby="cvcHelp" />
                     <div id="cvcHelp" class="form-text">Security Code usually on the back of the card.</div>
-                    <span asp-validation-for="Data.CVC" class="text-danger"></span>
+                    <span asp-validation-for="Data.CardCVC" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-check form-switch">
