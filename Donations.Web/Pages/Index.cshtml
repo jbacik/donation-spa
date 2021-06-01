@@ -106,11 +106,12 @@
                 </div>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" asp-for="Data.IsCoveringCosts" checked>
+                <input class="form-check-input" type="checkbox" asp-for="Data.IsCoveringCosts" id="IsCoveringCosts" checked>
                 <label class="form-check-label" asp-for="Data.IsCoveringCosts">I want to cover the card processing fee for my donation.</label>
             </div>
         </fieldset>
         <div class="mb-3">
+            <p>Covered Costs: <span id="CoveredCosts"></span></p>
             <strong id="TotalDonationAmount"></strong>
             <input type="submit" value="Contribute" class="btn btn-primary" />
         </div>
@@ -119,4 +120,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/donationform.js"></script>
 }
