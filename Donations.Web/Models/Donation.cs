@@ -36,11 +36,11 @@ namespace Donations.Web.Models
         [StringLength(50)]
         public string PaymentId { get; set; }
         [Required]
-        public double DonationAmount { get; set; }
+        public decimal DonationAmount { get; set; }
         public string ConfirmationNumber { get; set; }
         public bool HasCoveredFees { get; set; }
-        public double CoveredFeeAmount { get; set; }
-        public double TotalDonation { get; set; }
+        public decimal CoveredFeeAmount { get; set; }
+        public decimal TotalDonation { get; set; }
         public DateTime DonatedOnUTC { get; set; }
     }
 }

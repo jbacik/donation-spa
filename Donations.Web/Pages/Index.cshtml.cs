@@ -1,10 +1,12 @@
 ﻿using Donations.Web.Data;
 using Donations.Web.Models;
+using Donations.Web.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,8 +49,7 @@ namespace Donations.Web.Pages
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Email { get; set; }
-            public double DonationOption { get; set; }
-            public double DonationAmount { get; set; }
+            public decimal DonationAmount { get; set; }
             public bool IsCoveringCosts { get; set; }
 
             public string CardName { get; set; }
@@ -69,11 +70,13 @@ namespace Donations.Web.Pages
         {
             private readonly DonationContext _db;
             private readonly ILogger<Index> _logger;
+            private readonly PaymentProcessorSettings _paymentProcessorSettings;
 
-            public Handler(DonationContext db, ILogger<Index> logger)
+            public Handler(DonationContext db, ILogger<Index> logger, IOptions<PaymentProcessorSettings> paymentProcessorOptions)
             {
                 _db = db;
                 _logger = logger;
+                _paymentProcessorSettings = paymentProcessorOptions.Value;
             }
 
             public async Task<CommandResult> Handle(Command message, CancellationToken token)
@@ -98,7 +101,12 @@ namespace Donations.Web.Pages
                 }
 
                 //TODO replace with Covered Charges calculation
-                donation.TotalDonation = message.DonationAmount;
+                if (message.IsCoveringCosts)
+                {
+                    var calculator = new FeeCostCalculator(_paymentProcessorSettings.FixedFee, _paymentProcessorSettings.PercentFee);
+                    donation.CoveredFeeAmount = calculator.CalculateFeeCosts(message.DonationAmount);
+                }
+                donation.TotalDonation = donation.DonationAmount + donation.CoveredFeeAmount;
 
                 var payId = Guid.NewGuid(); // This would be replaced with an intent id from a payment processor
                 donation.PaymentId = payId.ToString();
@@ -158,7 +166,7 @@ namespace Donations.Web.Pages
                 RuleFor(m => m.CardExpiryDate).NotEmpty().Length(1, 10);
                 RuleFor(m => m.CardCVC).NotEmpty().Length(1, 10);
                 RuleFor(m => m.DonationAmount).NotEmpty().WithMessage("Please enter a donation amount in USD")
-                                            .GreaterThan(0.0).WithMessage("Please enter a donation amount in USD");
+                                            .GreaterThan(0.0M).WithMessage("Please enter a donation amount in USD");
             }
         }
     }
