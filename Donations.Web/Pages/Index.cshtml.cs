@@ -81,6 +81,8 @@ namespace Donations.Web.Pages
 
             public async Task<CommandResult> Handle(Command message, CancellationToken token)
             {
+                //!!IMPORTANT do NOT store any credit card information in the database.   When implemented we will pass this data directly to the payment process will handle the capturing of funds.
+
                 var donation = new Donation
                 {
                     Email = message.Email,
@@ -100,7 +102,6 @@ namespace Donations.Web.Pages
                     donation.Address2 = message.Address2;
                 }
 
-                //TODO replace with Covered Charges calculation
                 if (message.IsCoveringCosts)
                 {
                     var calculator = new FeeCostCalculator(_paymentProcessorSettings.FixedFee, _paymentProcessorSettings.PercentFee);
@@ -152,7 +153,6 @@ namespace Donations.Web.Pages
                 RuleFor(m => m.FirstName).NotEmpty().Length(1, 50);
                 RuleFor(m => m.LastName).NotEmpty().Length(1, 50);
                 RuleFor(m => m.Email).NotEmpty().EmailAddress().Length(1, 254);
-
 
                 RuleFor(m => m.Country).NotEmpty().Length(1, 100);
                 RuleFor(m => m.Address1).NotEmpty().Length(1, 100);
