@@ -14,14 +14,14 @@
 
     @if(confirmation != null && confirmation.IsSuccess)
     {
-        <div class="card border-success mb-3 text-center">
-            <div class="card-header bg-success text-light">Thank you @(confirmation?.ConfirmedFirstName)!</div>
-            <div class="card-body">
-                <h5 class="card-title text-success">Your generosity is making a difference!</h5>
-                <p class="card-text">Your donation is currently being processed.  If you have any problems or questions, please don't hesitate to contact us and reference <strong># @((confirmation?.ConfirmationNumber ?? "abC1234").ToUpper())</strong></p>
-                <small>Claire’s Crusade is a 501(c)(3) tax-exempt non-profit organization (TIN 45-3805351)</small>
-            </div>
+    <div class="card border-success mb-3 text-center">
+        <div class="card-header bg-success text-light">Thank you @(confirmation?.ConfirmedFirstName)!</div>
+        <div class="card-body">
+            <h5 class="card-title text-success">Your generosity is making a difference!</h5>
+            <p class="card-text">Your donation is currently being processed.  If you have any problems or questions, please don't hesitate to contact us and reference <strong># @((confirmation?.ConfirmationNumber ?? "abC1234").ToUpper())</strong></p>
+            <small>Claire’s Crusade is a 501(c)(3) tax-exempt non-profit organization (TIN 45-3805351)</small>
         </div>
+    </div>
     }
 
     <div class="row align-items-center mb-3 text-center">
@@ -135,5 +135,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://unpkg.com/currency.js&#64;~2.0.0/dist/currency.min.js"></script>
     <script src="~/js/donationform.js"></script>
 }
