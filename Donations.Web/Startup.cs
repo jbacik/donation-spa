@@ -26,6 +26,8 @@ namespace Donations.Web
             services.AddDbContext<DonationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<PaymentProcessorSettings>(Configuration.GetSection("PaymentProcessor"));
+
             services.AddMediatR(typeof(Startup));
 
             services.AddRazorPages();
