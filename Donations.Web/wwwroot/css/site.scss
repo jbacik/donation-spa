@@ -1,0 +1,54 @@
+﻿:root {
+    --bs-primary: #7c3e96;
+}
+
+$purple: #7C3E96;
+$dark-purple: #532965;
+$light-purple: #E6D3EE;
+
+.btn-primary {
+    background-color: $purple;
+    border-color: $purple;
+
+    &:hover {
+        background-color: $dark-purple;
+        border-color: $dark-purple;
+    }
+}
+h1 {
+    color:$purple;
+}
+
+text-primary {
+    color: $purple;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-size: 0.75rem;
+    color: #ced4da;
+    opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    font-size: 0.75rem;
+    color: #ced4da;
+}
+
+.form-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    text-align: left;
+    color: #6c757d;
+}
+
+fieldset {
+    border-bottom: 1px solid $light-purple;
+    margin-bottom: 1.5rem;
+
+    legend {
+        text-transform: uppercase;
+        color: $purple;
+        font-size:1.2rem;
+    }
+}

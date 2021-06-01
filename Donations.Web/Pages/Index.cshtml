@@ -5,8 +5,12 @@
     var confirmation = ViewData["Confirmation"] as Index.CommandResult;
 }
 
-<div class="text-center">
-    <h1>Claire's Crusade Donations</h1>
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-5 py-5 text-center">
+        <h1 class="fw-bold display-2">Claire's Crusade Donations</h1>
+        <img class="img-fluid" alt="Claire's Crusade Logo" src="~/assets/claire_crusade_logo.jpg" />
+    </div>
+
 
     @if(confirmation != null && confirmation.IsSuccess)
     {
@@ -20,102 +24,113 @@
         </div>
     }
 
-    <h2>Become a Crusader - Contribute Today</h2>
-    <form method="post">
-        <fieldset>
-            <legend id="donationLabel">Choose an amount to give</legend>
+    <div class="row align-items-center mb-3 text-center">
+        <h2>Become a Crusader - Contribute Today</h2>
+        <p>
+            When you donate to Claire's Crusade, your tax-deductible contributions fund research toward the development of treatments and support cutting edge efforts to discover a cure. You are enabling Claire’s Crusade to increase awareness and provide resources for families faced with the uncertainty this affliction can bring.
+        </p>
+    </div>
+
+    <div class="col-md-10 mx-auto">
+        <form method="post" class="p-4 p-md-5 border rounded-3 bg-light">
+            <fieldset>
+                <legend id="donationLabel">Choose an amount to give</legend>
+                <div class="mb-3">
+                    <label asp-for="Data.DonationAmount" class="form-label">Donation Amount <small>USD</small></label>
+                    <input type="text" class="form-control" asp-for="Data.DonationAmount" id="DonationAmount" autocomplete="off" required="required" placeholder="$0.00 USD" value="0.00">
+                    <span asp-validation-for="Data.DonationAmount" class="text-danger"></span>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Your Information</legend>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label asp-for="Data.FirstName" class="form-label">First Name</label>
+                        <input type="text" asp-for="Data.FirstName" class="form-control" required="required" maxlength="50" />
+                        <span asp-validation-for="Data.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Data.LastName" class="form-label">Last Name</label>
+                        <input type="text" asp-for="Data.LastName" class="form-control" required="required" maxlength="50" />
+                        <span asp-validation-for="Data.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Data.Email" class="form-label">Email</label>
+                    <input type="email" asp-for="Data.Email" class="form-control" required="required" maxlength="254" />
+                    <span asp-validation-for="Data.Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Data.Country" class="form-label">Country</label>
+                    <input type="text" asp-for="Data.Country" class="form-control" required="required" maxlength="100" />
+                    <span asp-validation-for="Data.Country" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Data.Address1" class="form-label">Address</label>
+                    <input type="text" asp-for="Data.Address1" class="form-control mb-1" placeholder="Street address, P.O. box" required="required" maxlength="100" />
+                    <span asp-validation-for="Data.Address1" class="text-danger"></span>
+                    <input type="text" asp-for="Data.Address2" class="form-control" placeholder="Apt, suite, unit, building, floor, etc" maxlength="100" />
+                    <span asp-validation-for="Data.Address2" class="text-danger"></span>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col">
+                        <label asp-for="Data.City" class="form-label">City</label>
+                        <input type="text" asp-for="Data.City" class="form-control" required="required" />
+                        <span asp-validation-for="Data.City" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Data.StateProvince" class="form-label">State/Province/Region</label>
+                        <input type="text" asp-for="Data.StateProvince" class="form-control" required="required" />
+                        <span asp-validation-for="Data.StateProvince" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Data.PostalCode" class="form-label">Postal/ZIP Code</label>
+                        <input type="text" asp-for="Data.PostalCode" class="form-control" required="required" />
+                        <span asp-validation-for="Data.PostalCode" class="text-danger"></span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Payment Information</legend>
+                <div class="mb-3">
+                    <label asp-for="Data.CardName" class="form-label">Name on Card</label>
+                    <input type="text" asp-for="Data.CardName" class="form-control" required="required" />
+                    <span asp-validation-for="Data.CardName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Data.CardNumber" class="form-label">Card Number</label>
+                    <input type="text" asp-for="Data.CardNumber" class="form-control" required="required" />
+                    <span asp-validation-for="Data.CardNumber" class="text-danger"></span>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label asp-for="Data.CardExpiryDate" class="form-label">Expiry</label>
+                        <input type="text" asp-for="Data.CardExpiryDate" placeholder="MM/YY" class="form-control" required="required" />
+                        <span asp-validation-for="Data.CardExpiryDate" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Data.CardCVC" class="form-label">CVC/CCV</label>
+                        <input type="text" asp-for="Data.CardCVC" class="form-control" required="required" aria-describedby="cvcHelp" />
+                        <div id="cvcHelp" class="form-text">Security Code usually on the back of the card.</div>
+                        <span asp-validation-for="Data.CardCVC" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" asp-for="Data.IsCoveringCosts" id="IsCoveringCosts" checked>
+                    <label class="form-check-label" asp-for="Data.IsCoveringCosts">I want to cover the card processing fee for my donation.</label>
+                </div>
+            </fieldset>
             <div class="mb-3">
-                <label asp-for="Data.DonationAmount" class="form-label">Donation Amount</label>
-                <input type="text" class="form-control" asp-for="Data.DonationAmount" id="DonationAmount" autocomplete="off" required="required" placeholder="$0.00 USD" value=" 0.00">
-                <span asp-validation-for="Data.DonationAmount" class="text-danger"></span>
-                <small>USD</small>
+                <p class="mb-3">
+                    <div class="h4" id="CoveredCostsContainer">Covered Costs: <span id="CoveredCosts"></span></div>
+                    <div class="h2">
+                        Total Donation: <span id="TotalDonationAmount"></span>
+                    </div>
+                </p>
+                <input type="submit" value="Contribute Today!" class="btn btn-primary" />
             </div>
-        </fieldset>
-        <fieldset>
-            <legend>Your Information</legend>
-            <div class="row mb-3">
-                <div class="col">
-                    <label asp-for="Data.FirstName" class="form-label">First Name</label>
-                    <input type="text" asp-for="Data.FirstName" class="form-control" required="required" maxlength="50" />
-                    <span asp-validation-for="Data.FirstName" class="text-danger"></span>
-                </div>
-                <div class="col">
-                    <label asp-for="Data.LastName" class="form-label">Last Name</label>
-                    <input type="text" asp-for="Data.LastName" class="form-control" required="required" maxlength="50" />
-                    <span asp-validation-for="Data.LastName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Data.Email" class="form-label">Email</label>
-                <input type="email" asp-for="Data.Email" class="form-control" required="required" maxlength="254" />
-                <span asp-validation-for="Data.Email" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Data.Country" class="form-label">Country</label>
-                <input type="text" asp-for="Data.Country" class="form-control" required="required" maxlength="100" />
-                <span asp-validation-for="Data.Country" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Data.Address1" class="form-label">Address</label>
-                <input type="text" asp-for="Data.Address1" class="form-control" placeholder="Street address, P.O. box" required="required" maxlength="100" />
-                <span asp-validation-for="Data.Address1" class="text-danger"></span>
-                <input type="text" asp-for="Data.Address2" class="form-control" placeholder="Apt, suite, unit, building, floor, etc" maxlength="100" />
-                <span asp-validation-for="Data.Address2" class="text-danger"></span>
-            </div>
-            <div class="mb-3 row">
-                <div class="col">
-                    <label asp-for="Data.City" class="form-label">City</label>
-                    <input type="text" asp-for="Data.City" class="form-control" required="required" />
-                    <span asp-validation-for="Data.City" class="text-danger"></span>
-                </div>
-                <div class="col">
-                    <label asp-for="Data.StateProvince" class="form-label">State/Province/Region</label>
-                    <input type="text" asp-for="Data.StateProvince" class="form-control" required="required" />
-                    <span asp-validation-for="Data.StateProvince" class="text-danger"></span>
-                </div>
-                <div class="col">
-                    <label asp-for="Data.PostalCode" class="form-label">Postal/ZIP Code</label>
-                    <input type="text" asp-for="Data.PostalCode" class="form-control" required="required" />
-                    <span asp-validation-for="Data.PostalCode" class="text-danger"></span>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Payment Information</legend>
-            <div class="mb-3">
-                <label asp-for="Data.CardName" class="form-label">Name on Card</label>
-                <input type="text" asp-for="Data.CardName" class="form-control" required="required" />
-                <span asp-validation-for="Data.CardName" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Data.CardNumber" class="form-label">Card Number</label>
-                <input type="text" asp-for="Data.CardNumber" class="form-control" required="required" />
-                <span asp-validation-for="Data.CardNumber" class="text-danger"></span>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <label asp-for="Data.CardExpiryDate" class="form-label">Expiry</label>
-                    <input type="text" asp-for="Data.CardExpiryDate" placeholder="MM/YY" class="form-control" required="required" />
-                    <span asp-validation-for="Data.CardExpiryDate" class="text-danger"></span>
-                </div>
-                <div class="col">
-                    <label asp-for="Data.CardCVC" class="form-label">CVC/CCV</label>
-                    <input type="text" asp-for="Data.CardCVC" class="form-control" required="required" aria-describedby="cvcHelp" />
-                    <div id="cvcHelp" class="form-text">Security Code usually on the back of the card.</div>
-                    <span asp-validation-for="Data.CardCVC" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" asp-for="Data.IsCoveringCosts" id="IsCoveringCosts" checked>
-                <label class="form-check-label" asp-for="Data.IsCoveringCosts">I want to cover the card processing fee for my donation.</label>
-            </div>
-        </fieldset>
-        <div class="mb-3">
-            <p>Covered Costs: <span id="CoveredCosts"></span></p>
-            <strong id="TotalDonationAmount"></strong>
-            <input type="submit" value="Contribute" class="btn btn-primary" />
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 @section Scripts {

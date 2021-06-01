@@ -1,71 +1,42 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
+﻿:root {
+  --bs-primary: #7c3e96; }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
+  background-color: #7C3E96;
+  border-color: #7C3E96; }
+  .btn-primary:hover {
+    background-color: #532965;
+    border-color: #532965; }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
+h1 {
+  color: #7C3E96; }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+text-primary {
+  color: #7C3E96; }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-size: 0.75rem;
+  color: #ced4da;
+  opacity: 1;
+  /* Firefox */ }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  font-size: 0.75rem;
+  color: #ced4da; }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
+.form-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  text-align: left;
+  color: #6c757d; }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
-}
+fieldset {
+  border-bottom: 1px solid #E6D3EE;
+  margin-bottom: 1.5rem; }
+  fieldset legend {
+    text-transform: uppercase;
+    color: #7C3E96;
+    font-size: 1.2rem; }

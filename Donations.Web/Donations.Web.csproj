@@ -5,7 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
