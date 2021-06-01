@@ -12,7 +12,8 @@
             <legend id="donationLabel">Choose an amount to give</legend>
             <div class="mb-3">
                 <label asp-for="Data.DonationAmount" class="form-label">Donation Amount</label>
-                <input type="text" class="form-control" asp-for="Data.DonationAmount" id="DonationAmount" placeholder="Other Amount" autocomplete="off">
+                <input type="text" class="form-control" asp-for="Data.DonationAmount" id="DonationAmount" autocomplete="off" required="required" placeholder="$0.00 USD" value=" 0.00">
+                <span asp-validation-for="Data.DonationAmount" class="text-danger"></span>
                 <small>USD</small>
             </div>
         </fieldset>
@@ -21,30 +22,30 @@
             <div class="row mb-3">
                 <div class="col">
                     <label asp-for="Data.FirstName" class="form-label">First Name</label>
-                    <input type="text" asp-for="Data.FirstName" class="form-control" required="required" max="50" />
+                    <input type="text" asp-for="Data.FirstName" class="form-control" required="required" maxlength="50" />
                     <span asp-validation-for="Data.FirstName" class="text-danger"></span>
                 </div>
                 <div class="col">
                     <label asp-for="Data.LastName" class="form-label">Last Name</label>
-                    <input type="text" asp-for="Data.LastName" class="form-control" required="required" max="50" />
+                    <input type="text" asp-for="Data.LastName" class="form-control" required="required" maxlength="50" />
                     <span asp-validation-for="Data.LastName" class="text-danger"></span>
                 </div>
             </div>
             <div class="mb-3">
                 <label asp-for="Data.Email" class="form-label">Email</label>
-                <input type="email" asp-for="Data.Email" class="form-control" required="required" max="254" />
+                <input type="email" asp-for="Data.Email" class="form-control" required="required" maxlength="254" />
                 <span asp-validation-for="Data.Email" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Data.Country" class="form-label">Country</label>
-                <input type="text" asp-for="Data.Country" class="form-control" required="required" max="100" />
+                <input type="text" asp-for="Data.Country" class="form-control" required="required" maxlength="100" />
                 <span asp-validation-for="Data.Country" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Data.Address1" class="form-label">Address</label>
-                <input type="text" asp-for="Data.Address1" class="form-control" placeholder="Street address, P.O. box" required="required" max="254" />
+                <input type="text" asp-for="Data.Address1" class="form-control" placeholder="Street address, P.O. box" required="required" maxlength="100" />
                 <span asp-validation-for="Data.Address1" class="text-danger"></span>
-                <input type="text" asp-for="Data.Address2" class="form-control" placeholder="Apt, suite, unit, building, floor, etc" max="254" />
+                <input type="text" asp-for="Data.Address2" class="form-control" placeholder="Apt, suite, unit, building, floor, etc" maxlength="100" />
                 <span asp-validation-for="Data.Address2" class="text-danger"></span>
             </div>
             <div class="mb-3 row">
