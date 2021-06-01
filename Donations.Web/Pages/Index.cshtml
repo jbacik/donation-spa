@@ -15,7 +15,7 @@
     @if(confirmation != null && confirmation.IsSuccess)
     {
     <div class="card border-success mb-3 text-center">
-        <div class="card-header bg-success text-light">Thank you @(confirmation?.ConfirmedFirstName)!</div>
+        <div class="card-header bg-success text-light fw-bold">Thank you @(confirmation?.ConfirmedFirstName)!</div>
         <div class="card-body">
             <h5 class="card-title text-success">Your generosity is making a difference!</h5>
             <p class="card-text">Your donation is currently being processed.  If you have any problems or questions, please don't hesitate to contact us and reference <strong># @((confirmation?.ConfirmationNumber ?? "abC1234").ToUpper())</strong></p>

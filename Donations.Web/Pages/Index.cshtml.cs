@@ -41,6 +41,8 @@ namespace Donations.Web.Pages
             }
 
             Confirmation = await _mediator.Send(Data);
+            if (Confirmation.IsSuccess) Data = new Command(); //reset the form
+
             return Page();
         }
 
