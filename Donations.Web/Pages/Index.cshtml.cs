@@ -17,6 +17,9 @@ namespace Donations.Web.Pages
         [BindProperty]
         public Command Data { get; set; }
 
+        [ViewData]
+        public CommandResult Confirmation { get; set; }
+
         public Index(IMediator mediator) => _mediator = mediator;
 
         public void OnGet() => Data = new Command();
@@ -25,15 +28,20 @@ namespace Donations.Web.Pages
         {
             if (!ModelState.IsValid)
             {
+                Confirmation = new CommandResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = "One or more fields require your attention.  Please complete the form and try again."
+                };
+
                 return Page();
             }
 
-            var result = await _mediator.Send(Data);
-
-            return RedirectToPage("./Index"); //SPA should show thank you not redirect
+            Confirmation = await _mediator.Send(Data);
+            return Page();
         }
 
-        public class Command : IRequest<string>
+        public class Command : IRequest<CommandResult>
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
@@ -56,7 +64,7 @@ namespace Donations.Web.Pages
 
         }
 
-        public class Handler : IRequestHandler<Command, string>
+        public class Handler : IRequestHandler<Command, CommandResult>
         {
             private readonly DonationContext _db;
             private readonly ILogger<Index> _logger;
@@ -67,7 +75,7 @@ namespace Donations.Web.Pages
                 _logger = logger;
             }
 
-            public async Task<string> Handle(Command message, CancellationToken token)
+            public async Task<CommandResult> Handle(Command message, CancellationToken token)
             {
                 var donation = new Donation
                 {
@@ -99,21 +107,33 @@ namespace Donations.Web.Pages
 
                 await _db.AddAsync(donation, token);
 
-                bool isSuccess = false;
+                var result = new CommandResult();
                 try
                 {
-                    var result = await _db.SaveChangesAsync(token);
+                    var rowsAffected = await _db.SaveChangesAsync(token);
                     _logger.LogInformation("Donation successfully created Id = @0", donation.Id);
-                    isSuccess = (result > 0);
+                    result.IsSuccess = (rowsAffected > 0);
+                    if (result.IsSuccess)
+                    {
+                        result.ConfirmationNumber = donation.ConfirmationNumber;
+                        result.ConfirmedFirstName = donation.FirstName;
+                    }
+                    return result;
                 }
                 catch(Exception ex)
                 {
                     _logger.LogError(ex, "Unable to save donation");
-                    return string.Empty;
+                    return null;
                 }
-
-                return isSuccess ? donation.ConfirmationNumber : string.Empty;
             }
+        }
+
+        public class CommandResult
+        {
+            public bool IsSuccess { get; set; }
+            public string ErrorMessage { get; set; }
+            public string ConfirmedFirstName { get; set; }
+            public string ConfirmationNumber { get; set; }
         }
     }
 }
